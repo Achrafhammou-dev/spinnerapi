@@ -1,8 +1,8 @@
 {
   "rewrites": [
-    { "source": "/index", "destination": "/index.html" },
+    { "source": "/home", "destination": "/index.html" },
     { "source": "/scanner", "destination": "/scanner.html" },
-        { "source": "/feedabck", "destination": "/feedabck.html" }
+        { "source": "/feedback", "destination": "/feedabck.html" }
 
 
   ],
