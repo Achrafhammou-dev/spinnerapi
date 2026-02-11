@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BK Morocco - Exclusive Loyalty</title>
+    <link rel="icon" type="image/svg+xml" href="https://upload.wikimedia.org/wikipedia/commons/c/cc/Burger_King_2020.svg">
+    <link rel="apple-touch-icon" href="https://upload.wikimedia.org/wikipedia/commons/c/cc/Burger_King_2020.svg">
+    <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/c/cc/Burger_King_2020.svg" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --bk-red: #d62300;
+            --bk-orange: #ed7902;
+            --bk-yellow: #f5ebdc;
+            --bk-brown: #502314;
+            --bk-dark: #2b2b2b;
+            --font-flame: 'Lilita One', cursive;
+            --font-body: 'Open Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bk-yellow);
+            color: var(--bk-brown);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6, .bk-font {
+            font-family: var(--font-flame);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-bottom: 8px solid var(--bk-orange);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .hero-bg-blur {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('http://burgerkingmaroc.vercel.app/img/bnr.png') center/cover;
+            filter: blur(25px) brightness(0.8);
+            transform: scale(1.2);
+            z-index: 1;
+        }
+
+        .hero-banner {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 45vh;
+            background: url('http://burgerkingmaroc.vercel.app/img/bnr.png') no-repeat center center;
+            background-size: contain;
+        }
+
+        .logo-container {
+            position: relative;
+            z-index: 10;
+            margin-top: -60px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .bk-logo {
+            width: 120px;
+            height: 120px;
+            background: white;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .spin-section {
+            background: white;
+            border-radius: 30px;
+            padding: 40px 20px;
+            margin: 30px 15px;
+            box-shadow: 0 15px 35px rgba(80, 35, 20, 0.1);
+            border: 2px dashed var(--bk-orange);
+        }
+
+        .btn-spin {
+            background: var(--bk-red);
+            border: none;
+            padding: 18px 20px;
+            font-family: var(--font-flame);
+            font-size: 1.8rem;
+            border-radius: 100px;
+            color: white;
+            box-shadow: 0 10px 0px #9e1a00;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+        }
+
+        .btn-spin:active {
+            transform: translateY(4px);
+            box-shadow: 0 5px 0px #9e1a00;
+        }
+
+        .offer-card {
+            position: relative;
+            height: 250px;
+            border-radius: 25px;
+            overflow: hidden;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .card-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(80, 35, 20, 0.95) 15%, transparent 70%);
+            z-index: 2;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 3;
+            color: white;
+        }
+
+        .badge-promo {
+            background: var(--bk-orange);
+            font-family: var(--font-flame);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+        }
+
+        .footer-nav {
+            background: var(--bk-brown);
+            padding: 40px 20px;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--bk-yellow);
+            border-radius: 15px;
+            padding: 15px;
+            font-family: var(--font-flame);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+
+        .action-btn:hover {
+            background: var(--bk-orange);
+            color: white;
+            border-color: var(--bk-orange);
+        }
+
+        @media (min-width: 992px) {
+            .hero-banner { height: 65vh; }
+            .container-custom { max-width: 900px; margin: auto; }
+        }
+
+        #wheel-container {
+            position: relative;
+            width: 320px;
+            margin: 0 auto;
+        }
+
+        #canvas {
+            width: 100%;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            z-index: 10;
+        }
+
+        .form-glass {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            border: 2px solid var(--bk-orange);
+        }
+
+        .hidden { display: none; }
+
+        #custom-alert-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(80, 35, 20, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        #custom-alert-overlay.active { opacity: 1; pointer-events: auto; }
+        .bk-modal {
+            background: var(--bk-yellow);
+            width: 90%; max-width: 400px;
+            border-radius: 30px; padding: 40px 20px;
+            text-align: center; border: 5px solid var(--bk-orange);
+            transform: scale(0.7); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #custom-alert-overlay.active .bk-modal { transform: scale(1); }
+        .modal-icon { font-size: 4rem; display: block; margin-bottom: 15px; }
+        .modal-title { font-family: var(--font-flame); color: var(--bk-red); font-size: 2rem; }
+    </style>
+</head>
+<body>
+<div id="custom-alert-overlay">
+    <div class="bk-modal">
+        <span id="modal-icon" class="modal-icon"></span>
+        <h2 id="modal-title" class="modal-title"></h2>
+        <p id="modal-msg" class="modal-msg" style="font-weight:bold; color:var(--bk-brown);"></p>
+        <button id="modal-close" class="btn-spin w-100">OK!</button>
+    </div>
+</div>
+
+    <div id="home-zone">
+        <div class="hero-wrapper animate__animated animate__fadeIn">
+            <div class="hero-bg-blur"></div>
+            <div class="hero-banner"></div>
+        </div>
+
+        <div class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Burger_King_2020.svg" alt="BK Logo" class="bk-logo animate__animated animate__bounceIn">
+        </div>
+
+        <div class="container container-custom text-center mb-5">
+            <h1 class="mt-4 animate__animated animate__fadeInUp" style="font-size: 2.5rem; color: var(--bk-brown);">
+                Win Your <span style="color: var(--bk-red);">Free</span> Whopper!
+            </h1>
+            <p class="fw-bold text-muted animate__animated animate__fadeInUp delay-1">Scan. Spin. Eat. Repeat.</p>
+
+            <div class="spin-section animate__animated animate__zoomIn delay-1">
+                <h4 class="mb-4">Ready to test your luck?</h4>
+                <button id="start-process-btn" class="btn-spin animate__animated animate__pulse animate__infinite">
+                    <i class="bi bi-gear-fill me-2"></i> SPIN NOW
+                </button>
+            </div>
+
+            <div class="px-3 text-start">
+                <h3 class="mb-4 d-flex align-items-center"><i class="bi bi-fire text-danger me-2"></i> Hot Deals</h3>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="offer-card animate__animated animate__fadeInLeft delay-2">
+                            <div class="card-bg" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5sgzZT6z8bgpQU3i6i5WgLUUNRk6SA1FF7g&s');"></div>
+                            <div class="card-overlay"></div>
+                            <div class="card-content">
+                                <span class="badge-promo">-50% OFF</span>
+                                <h5 class="mt-2 mb-0">Double Deal</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="offer-card animate__animated animate__fadeInRight delay-2">
+                            <div class="card-bg" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5sgzZT6z8bgpQU3i6i5WgLUUNRk6SA1FF7g&s');"></div>
+                            <div class="card-overlay"></div>
+                            <div class="card-content">
+                                <span class="badge-promo">Freebie</span>
+                                <h5 class="mt-2 mb-0">Large Fries</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+    <div class="container container-custom">
+        <div id="registration-zone" class="hidden animate__animated animate__fadeIn mt-5">
+            <div class="form-glass shadow-lg">
+                <h3 class="bk-font text-center mb-4">Register to Play</h3>
+                <form id="loyaltyForm">
+    <div class="mb-3 text-start">
+        <label class="form-label fw-bold">Full Name</label>
+        <input type="text" name="name" class="form-control" required placeholder="Full Name">
+    </div>
+    <div class="mb-3 text-start">
+        <label class="form-label fw-bold">Email Address</label>
+        <input type="email" name="email" class="form-control" required placeholder="email@example.com">
+    </div>
+    <div class="mb-3 text-start">
+        <label class="form-label fw-bold">Phone Number</label>
+        <input type="tel" name="phone" class="form-control" required placeholder="06XXXXXXXX">
+    </div>
+    <div class="mb-3 text-start">
+        <label class="form-label fw-bold">City</label>
+        <select name="city" class="form-select" required>
+            <option value="" selected disabled>Select your city</option>
+            <option value="Casablanca">Casablanca</option>
+            <option value="Rabat">Rabat</option>
+            <option value="Marrakech">Marrakech</option>
+            <option value="Agadir">Agadir</option>
+            <option value="Tangier">Tangier</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+    <button type="submit" id="submitBtn" class="btn-spin w-100 mt-3">Unlock My Spin</button>
+</form>
+            </div>
+        </div>
+
+        <div id="spinner-zone" class="hidden text-center animate__animated animate__zoomIn mt-5">
+            <h2 class="bk-font mb-4">Good Luck!</h2>
+            <div id="wheel-container">
+                <img src="https://cdn-icons-png.flaticon.com/512/3585/3585810.png" class="wheel-pointer" alt="Pointer">
+                <canvas id="canvas" width="500" height="500"></canvas>
+            </div>
+            <button id="spinBtn" class="btn-spin mt-4">SPIN THE WHEEL</button>
+        </div>
+    </div>
+    <footer class="footer-nav">
+        <div class="container container-custom">
+            <h5 class="text-white mb-4 text-center">Helpful Links</h5>
+            <a href="https://burgerkingmaroc.vercel.app/" class="action-btn">
+                <i class="bi bi-shop"></i> official website
+            </a>
+            <a href="feedabck.html" class="action-btn">
+                <i class="bi bi-megaphone"></i> Send Feedback
+            </a>
+            <p class="text-center text-white-50 small mt-4">© 2025 BURGER KING MOROCCO. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// --- SECURE CONFIGURATION ---
+// No Google Script URL here. No SECRET_KEY here.
+const apiUrl = '/api/spin'; 
+
+const homeZone = document.getElementById('home-zone');
+const regZone = document.getElementById('registration-zone');
+const spinZone = document.getElementById('spinner-zone');
+const form = document.getElementById('loyaltyForm');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+let isSpinning = false;
+let userData = {};
+
+// 2. Navigation
+document.getElementById('start-process-btn').addEventListener('click', function() {
+    homeZone.classList.add('hidden');
+    regZone.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// 3. Custom Alert Function
+function showBKAlert(title, message, icon, callback = null) {
+    const overlay = document.getElementById('custom-alert-overlay');
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-msg').innerText = message;
+    document.getElementById('modal-icon').innerText = icon;
+    overlay.classList.add('active');
+    const closeBtn = document.getElementById('modal-close');
+    const closeHandler = () => {
+        overlay.classList.remove('active');
+        if (callback) callback();
+        closeBtn.removeEventListener('click', closeHandler);
+    };
+    closeBtn.addEventListener('click', closeHandler);
+}
+
+// 4. Form Submission (PROXY SECURE)
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.innerHTML = "SAVING...";
+    submitBtn.disabled = true;
+
+    // Send JSON to Vercel instead of FormData to Google
+    const formData = {
+        action: 'register',
+        name: form.name.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        city: form.city.value
+    };
+
+    fetch(apiUrl, { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+    })
+    .then(res => res.json())
+    .then(response => {
+        if (response.status === "SUCCESS") {
+            window.serverPrize = response.prize;
+            window.serverIndex = response.index;
+
+            regZone.classList.add('animate__fadeOut');
+            setTimeout(() => {
+                regZone.classList.add('hidden');
+                spinZone.classList.remove('hidden');
+                drawWheel(); 
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 500);
+
+        } else if (response.status === "DUPLICATE") {
+            showBKAlert("OOPS!", "Already registered!", "🚫");
+            submitBtn.innerHTML = "Unlock My Spin";
+            submitBtn.disabled = false;  
+
+        } else {
+            console.log("Unknown Status:", response);
+            showBKAlert("Error", "Something went wrong. Try again.", "⚠️");
+            submitBtn.innerHTML = "Unlock My Spin";
+            submitBtn.disabled = false;
+        }
+    })
+    .catch(error => {
+        console.error("Fetch Error:", error);
+        showBKAlert("Connection Error", "Could not connect to server");
+        submitBtn.innerHTML = "Unlock My Spin";
+        submitBtn.disabled = false;
+    });
+});
+
+// 5. Wheel Drawing
+const prizes = ["FREE WHOPPER", "TRY AGAIN", "FREE FRIES", "TRY AGAIN", "FREE SODA", "TRY AGAIN"];
+const colors = ["#d62300", "#502314", "#ed7902", "#502314", "#f5ebdc", "#502314"];
+
+function drawWheel() {
+    const arc = Math.PI / (prizes.length / 2);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    prizes.forEach((prize, i) => {
+        const angle = i * arc;
+        ctx.fillStyle = colors[i];
+        ctx.beginPath();
+        ctx.moveTo(250, 250);
+        ctx.arc(250, 250, 250, angle, angle + arc);
+        ctx.lineTo(250, 250);
+        ctx.fill();
+        
+        ctx.save();
+        ctx.translate(250 + Math.cos(angle + arc/2) * 180, 250 + Math.sin(angle + arc/2) * 180);
+        ctx.rotate(angle + arc/2 + Math.PI/2);
+        ctx.fillStyle = (colors[i] === "#f5ebdc") ? "#502314" : "white";
+        ctx.font = "bold 20px 'Lilita One', Arial";
+        ctx.fillText(prize, -ctx.measureText(prize).width/2, 0);
+        ctx.restore();
+    });
+}
+
+// 6. Spin Logic (PROXY SECURE)
+document.getElementById('spinBtn').addEventListener('click', () => {
+    if (isSpinning || !window.serverPrize) return;
+    isSpinning = true;
+
+    const prizeIndex = window.serverIndex; 
+    const finalPrize = window.serverPrize;
+    const userEmail = document.querySelector('input[name="email"]').value;
+
+    const segmentDegree = 60; 
+    const totalSpins = 3600; 
+    const offset = 240;      
+    const stopAngle = totalSpins + offset - (prizeIndex * segmentDegree);
+
+    canvas.style.transition = "transform 5s cubic-bezier(0.15, 0, 0.15, 1)";
+    canvas.style.transform = `rotate(${stopAngle}deg)`;
+    
+    // Wait for animation (5500ms)
+    setTimeout(() => {
+        if (finalPrize !== "TRY AGAIN") {
+            
+            // --- TRIGGER EMAIL VIA VERCEL (PROXY) ---
+            const claimData = {
+                action: 'claim',
+                email: userEmail
+            };
+
+            fetch(apiUrl, { 
+                method: 'POST', 
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(claimData) 
+            });
+            // -----------------------------------------
+
+            showBKAlert("MABROUK! 🎉", `Check your email for your ${finalPrize} QR Code!`, "🍔", () => { 
+                location.reload(); 
+            });
+        } else {
+            showBKAlert("SO CLOSE!", "Hard luck! Try again next time.", "❌", () => {
+                location.reload();
+            });
+        }
+    }, 5500);
+});
+</script>
+</body>
+</html>

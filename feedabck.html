@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Burger King Feedback</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+<link rel="apple-touch-icon" href="https://upload.wikimedia.org/wikipedia/commons/c/cc/Burger_King_2020.svg">
+
+<link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/c/cc/Burger_King_2020.svg" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bkCream: '#F6F1D1',
+                        bkRed: '#D62300',
+                        bkBrown: '#502314',
+                        bkOrange: '#FAAF18',
+                    },
+                    fontFamily: {
+                        'bk-title': ['"Titan One"', 'cursive'],
+                        'bk-body': ['"Nunito"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F6F1D1;
+            color: #502314;
+            font-family: 'Nunito', sans-serif;
+            overflow: hidden; /* Empêche le scroll de la page entière */
+        }
+
+        /* Masquer la barre de scroll tout en gardant le défilement */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Style quand un resto est sélectionné */
+        .radio-resto:checked + div {
+            background-color: #D62300;
+            color: white;
+            border-color: #D62300;
+        }
+        .radio-resto:checked + div .check-icon {
+            display: block;
+        }
+
+        /* Animations */
+        .slide-up { animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="h-screen w-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-[400px] h-[580px] max-h-[90vh] bg-white rounded-[2rem] shadow-xl relative flex flex-col pt-12 pb-6 px-6">
+
+        <div class="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-white p-2 rounded-full shadow-sm z-20">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Burger_King_2020.svg" alt="BK Logo" class="w-16 h-16">
+        </div>
+
+        <div id="step-1" class="flex flex-col h-full justify-center slide-up">
+            <h1 class="text-4xl text-center font-bk-title text-bkBrown mb-2">C'était <span class="text-bkRed">bon ?</span></h1>
+            <p class="text-center text-bkBrown/60 font-bold mb-10 text-lg">On veut tout savoir !</p>
+
+            <div class="space-y-4">
+                <button onclick="showStep2()" class="w-full bg-bkCream border-2 border-transparent hover:border-bkOrange rounded-2xl p-5 flex items-center justify-between group transition-all active:scale-95 shadow-sm">
+                    <span class="text-xl font-bk-title text-bkRed pl-2">C'était le feu !</span>
+                    <i class="fa-solid fa-fire text-2xl text-bkOrange"></i>
+                </button>
+
+                <button onclick="handleDislike()" class="w-full bg-white border-2 border-bkBrown/10 hover:border-bkBrown/30 rounded-2xl p-5 flex items-center justify-between group transition-all active:scale-95">
+                    <span class="text-lg font-bk-title text-bkBrown/80 pl-2">Peut mieux faire</span>
+                    <i class="fa-solid fa-face-frown text-2xl text-bkBrown/40"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="step-2" class="hidden flex-col h-full relative">
+            
+            <div class="flex items-center justify-between mb-4 flex-shrink-0">
+                <button onclick="backToStep1()" class="text-bkBrown/40 hover:text-bkRed p-2">
+                    <i class="fa-solid fa-arrow-left text-xl"></i>
+                </button>
+                <h2 class="font-bk-title text-2xl text-bkBrown text-center flex-1 pr-8">Quel Resto ?</h2>
+            </div>
+
+            <form id="restoForm" onsubmit="submitForm(event)" class="flex-1 overflow-y-auto no-scrollbar space-y-3 px-1">
+                
+                <label class="cursor-pointer block group">
+                    <input type="radio" name="restaurant" value="maariff" class="radio-resto hidden" required>
+                    <div class="p-4 rounded-xl border border-bkBrown/10 flex items-center justify-between bg-white transition-all">
+                        <span class="font-bold text-lg">Casablanca - Maarif</span>
+                        <i class="fa-solid fa-check check-icon text-white hidden"></i>
+                    </div>
+                </label>
+
+                <label class="cursor-pointer block group">
+                    <input type="radio" name="restaurant" value="ain-diab" class="radio-resto hidden">
+                    <div class="p-4 rounded-xl border border-bkBrown/10 flex items-center justify-between bg-white transition-all">
+                        <span class="font-bold text-lg">Casablanca - Ain Diab</span>
+                        <i class="fa-solid fa-check check-icon text-white hidden"></i>
+                    </div>
+                </label>
+
+                <label class="cursor-pointer block group">
+                    <input type="radio" name="restaurant" value="rabat-agdal" class="radio-resto hidden">
+                    <div class="p-4 rounded-xl border border-bkBrown/10 flex items-center justify-between bg-white transition-all">
+                        <span class="font-bold text-lg">Rabat - Agdal</span>
+                        <i class="fa-solid fa-check check-icon text-white hidden"></i>
+                    </div>
+                </label>
+
+                <label class="cursor-pointer block group">
+                    <input type="radio" name="restaurant" value="marrakech-gueliz" class="radio-resto hidden">
+                    <div class="p-4 rounded-xl border border-bkBrown/10 flex items-center justify-between bg-white transition-all">
+                        <span class="font-bold text-lg">Marrakech - Gueliz</span>
+                        <i class="fa-solid fa-check check-icon text-white hidden"></i>
+                    </div>
+                </label>
+
+                <label class="cursor-pointer block group">
+                    <input type="radio" name="restaurant" value="tanger-blvd" class="radio-resto hidden">
+                    <div class="p-4 rounded-xl border border-bkBrown/10 flex items-center justify-between bg-white transition-all">
+                        <span class="font-bold text-lg">Tanger - Boulevard</span>
+                        <i class="fa-solid fa-check check-icon text-white hidden"></i>
+                    </div>
+                </label>
+
+                 <label class="cursor-pointer block group">
+                    <input type="radio" name="restaurant" value="casa-california" class="radio-resto hidden">
+                    <div class="p-4 rounded-xl border border-bkBrown/10 flex items-center justify-between bg-white transition-all">
+                        <span class="font-bold text-lg">Casablanca - California</span>
+                        <i class="fa-solid fa-check check-icon text-white hidden"></i>
+                    </div>
+                </label>
+
+            </form>
+
+            <div class="mt-4 flex-shrink-0">
+                <button onclick="document.getElementById('restoForm').requestSubmit()" class="w-full bg-bkRed text-white font-bk-title text-xl py-4 rounded-2xl shadow-lg shadow-bkRed/20 hover:bg-[#b51d00] active:scale-95 transition-all flex justify-center items-center gap-2">
+                    Valider <i class="fa-solid fa-chevron-right text-base mt-1"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="fixed bottom-4 text-bkBrown/20 text-[10px] font-bold tracking-[0.2em] uppercase">
+        Burger King Maroc
+    </div>
+
+    <script>
+        // LIEN DISLIKE
+        const dislikeLink = "https://feedbackbk.vercel.app/";
+        
+        // LIENS GOOGLE (A REMPLACER PAR VOS VRAIS LIENS)
+        // J'ai mis des recherches Google Maps pour que tu puisses tester le clic
+        const googleLinks = {
+            "maariff": "https://www.google.com/maps/search/?api=1&query=Burger+King+Maarif+Casablanca", 
+            "ain-diab": "https://www.google.com/maps/search/?api=1&query=Burger+King+Ain+Diab",
+            "rabat-agdal": "https://www.google.com/maps/place/Burger+King/@33.98752,-6.85183,545m/data=!3m1!1e3!4m8!3m7!1s0xda76d47c55901e7:0xeeedba0a87163e35!8m2!3d33.98752!4d-6.85183!9m1!1b1!16s%2Fg%2F1yfprvj0s?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D",
+            "marrakech-gueliz": "https://www.google.com/maps/search/?api=1&query=Burger+King+Gueliz+Marrakech",
+            "tanger-blvd": "https://www.google.com/maps/search/?api=1&query=Burger+King+Tanger+Boulevard",
+            "casa-california": "https://www.google.com/maps/search/?api=1&query=Burger+King+California+Casablanca"
+        };
+
+        function showStep2() {
+            const s1 = document.getElementById('step-1');
+            const s2 = document.getElementById('step-2');
+            s1.style.display = 'none';
+            s2.classList.remove('hidden');
+            s2.style.display = 'flex'; // Important pour le layout flex
+            s2.classList.add('slide-up');
+        }
+
+        function backToStep1() {
+            const s1 = document.getElementById('step-1');
+            const s2 = document.getElementById('step-2');
+            s2.style.display = 'none';
+            s1.style.display = 'flex';
+            s1.classList.add('slide-up');
+        }
+
+        function handleDislike() {
+            document.body.style.opacity = '0.5';
+            window.location.href = dislikeLink;
+        }
+
+        function submitForm(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const selected = formData.get('restaurant');
+            const btn = document.querySelector('#step-2 button');
+
+            if (selected && googleLinks[selected]) {
+                btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i>';
+                setTimeout(() => {
+                    window.location.href = googleLinks[selected];
+                }, 500);
+            } else {
+                // Animation de secousse si rien n'est sélectionné
+                const container = document.getElementById('restoForm');
+                container.classList.add('translate-x-2', 'transition-transform');
+                setTimeout(() => container.classList.remove('translate-x-2'), 100);
+                setTimeout(() => container.classList.add('-translate-x-2'), 200);
+                setTimeout(() => container.classList.remove('-translate-x-2'), 300);
+            }
+        }
+    </script>
+</body>
+</html>
